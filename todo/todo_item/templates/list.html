@@ -1,20 +1,18 @@
 {% extends 'master.html' %}
 {% block title %}
-    <title>Главная</title>
+    <title>Список</title>
 {% endblock %}
 {% block name_list %}
-    <div class="table-data_table-header-item-1">TO DO List</div>
+    <div class="table-data_table-header-item-1">{{ name_list }}</div>
 {% endblock %}
 {% block body %}
     {% for row in lists %}
         <div class="table-data__table-row">
-            <div class="table-row_table_cell-1">
-                {% if row.is_done %}
-                    <a href="#"><li class="is_done_text">{{ row.name }}</li></a>
-                {% else %}
-                    <a href="#"><li>{{ row.name }}</li></a>
-                {% endif %}
-            </div>
+            {% if row.is_done %}
+                <div class="table-row_table_cell-1"> <li class="is_done_text"> {{ row.name }}</li></div>
+            {% else %}
+                <div class="table-row_table_cell-1"> {{ row.name }}</div>
+            {% endif %}
             <div class="buttons">
                 <div class="table-data-two_table-icon">
                     <a href='#'>
@@ -26,16 +24,29 @@
                         </svg>
                     </a>
                 </div>
-                <a class="delete_button" href="#">
-                    <div class="table-row_table_icon">
+
+                <div class="calendarik">
+                    {% if row.date == None %}
+                        <a href='#'>
+                            <img src=" /static/images/calendar.png" alt="calendar" width="26px" height="24px">
+                        </a>
+                    {% else  %}
+                        <a href='#'> <div class="calendarik"></div>
+                            {{ row.date }}
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="table-row_table_icon">
+                    <a class="delete_button" href="#">
                         <svg width="20" height="22" viewBox="0 0 20 22" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M6.99987 0H12.9999C14.1044 0 14.9999 0.89543 14.9999 2V3H18C19.1046 3 20 3.89543 20 5V7C20 8.10457 19.1046 9 18 9H17.9196L16.9997 20C16.9997 21.1046 16.1043 22 14.9997 22H4.99974C3.89517 22 2.99974 21.1046 3.00319 20.0831L2.07961 9H2C0.895431 9 0 8.10457 0 7V5C0 3.89543 0.895431 3 2 3H4.99987V2C4.99987 0.89543 5.8953 0 6.99987 0ZM4.99987 5V4.99999H1.99987V6.99999H17.9999V4.99999H14.9999V5H4.99987ZM4.99954 20L4.08603 9H15.9127L15.003 19.917L14.9995 20H4.99954ZM13.0001 1.99999V2.99999H7.00013V1.99999H13.0001Z"
                                   fill="#BBC1C7"/>
                         </svg>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     {% endfor %}
