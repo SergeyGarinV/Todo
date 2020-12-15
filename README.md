@@ -1,11 +1,19 @@
-Домашнее задание Debug
+### Домашнее задание Apple Task
 
-Индекс элемента списка 773214 
-
-Элемент на котором ломается функция left_arr[i] = '63'
-
-Для успешного выполнения функции исправляем 19 строку на: 
-
-`if int(left_arr[i]) < right:`
-
-добавляя функцию int()
+Алгоритм быстрого поиска элемента
+````
+def get_fixed_point(array):
+    midl = len(array) // 2
+    index = midl
+    while midl > 0:
+        if midl % 2 and midl != 1:
+            midl = midl // 2 + 1
+        else:
+            midl = midl // 2
+        if array[index] > index:
+            index -= midl
+        elif array[index] < index:
+            index += midl
+        if array[index] == index:
+            return index
+    return False
