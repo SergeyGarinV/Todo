@@ -11,8 +11,8 @@
 
 {% block body_if %}
     {% if row.is_done %}
-        <a href="#"><li class="is_done_text">{{ row.name }}</li></a>
+        <a href="{% url "items:items" pk=row.id %}"><li class="is_done_text">{{ row.name }}</li></a>
     {% else %}
-        <a href="#"><li>{{ row.name }}</li></a>
+        <a href="{% url "items:items" pk=row.id %}"><li>{{ row.name }}</li></a>
     {% endif %}
 {% endblock %}

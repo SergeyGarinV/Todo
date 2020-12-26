@@ -19,13 +19,13 @@
 
 {% block calendarik %}
     <div class="calendarik">
-        {% if row.date == None %}
+        {% if row.expr_date == None %}
             <a href='#'>
                 <img src=" /static/images/calendar.png" alt="calendar" width="26px" height="24px">
             </a>
         {% else  %}
             <a href='#'> <div class="calendarik"></div>
-                {{ row.date }}
+                {{ row.expr_date|date:"d.m.Y" }}
             </a>
         {% endif %}
     </div>

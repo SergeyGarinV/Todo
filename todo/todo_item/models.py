@@ -8,9 +8,9 @@ class ItemModel(models.Model):
     name = models.CharField(max_length=128, verbose_name='Название элемента')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True, blank=True)
-    listmodules_id = models.ForeignKey('main.ListModel', on_delete=models.CASCADE)
+    listmodules = models.ForeignKey('main.ListModel', on_delete=models.CASCADE)
     is_done = models.BooleanField(default=False)
-    expr_date = models.DateTimeField(blank=True)
+    expr_date = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name = 'Элементы'
