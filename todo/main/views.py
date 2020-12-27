@@ -3,6 +3,18 @@ from main.models import ListModel
 from main.form import ListForm
 
 
+def login_decorator():
+    def wrapper1(func):
+        def wrapper2(request, *args, **kwargs):
+            if not request.user.is_authenticated:
+                return redirect('registration:login')
+            res = func(request, *args, **kwargs)
+            return res
+        return wrapper2
+    return wrapper1
+
+
+@login_decorator()
 def main_view(request):
     lists = ListModel.objects.filter(user=request.user)
     contex = {

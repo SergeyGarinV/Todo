@@ -17,6 +17,12 @@
     {% endif %}
 {% endblock %}
 
+{% block create %}
+    <a class="add_new_list" href={% url 'items:create_item' pk %}>
+        <div class="header__button-create-bundle">+</div>
+    </a>
+{% endblock %}
+
 {% block calendarik %}
     <div class="calendarik">
         {% if row.expr_date == None %}

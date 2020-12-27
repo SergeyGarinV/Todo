@@ -9,6 +9,12 @@
     <div class="table-data_table-header-item-1">TO DO List</div>
 {% endblock %}
 
+{% block create %}
+    <a class="add_new_list" href={% url 'main:create' %}>
+        <div class="header__button-create-bundle">+</div>
+    </a>
+{% endblock %}
+
 {% block body_if %}
     {% if row.is_done %}
         <a href="{% url "items:items" pk=row.id %}"><li class="is_done_text">{{ row.name }}</li></a>

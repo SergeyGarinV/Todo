@@ -10,9 +10,9 @@ class ItemModel(models.Model):
     modified = models.DateTimeField(auto_now=True, blank=True)
     listmodules = models.ForeignKey('main.ListModel', on_delete=models.CASCADE)
     is_done = models.BooleanField(default=False)
-    expr_date = models.DateTimeField(null=True)
+    expr_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'Элементы'
         verbose_name_plural = 'Элементы'
-        unique_together = ('name', 'listmodules_id')
+        unique_together = ('name', 'listmodules')

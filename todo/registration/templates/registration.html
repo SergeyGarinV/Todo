@@ -33,15 +33,15 @@
                 {% endif %}
                 <p class="form_class_name-field">e-mail</p>
                 {{ form.email }}
-                {% if form.errors.email %}
-                    {{ form.errors.email }}
+                {% if form.email.errors %}
+                    {{ form.email.errors }}
                 {% endif %}
                 <p class="form_class_name-field"> Пароль</p>
                 {{ form.password1 }}
                 <p class="form_class_name-field">Подтверждение пароля</p>
                 {{ form.password2 }}
-                {% if form.errors.password2 %}
-                    {{ form.errors.password2 }}
+                {% if form.password2.errors %}
+                    {{ form.password2.errors }}
                 {% endif %}
             </form>
             <div class="registration__column_right__form_footer">

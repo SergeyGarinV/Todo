@@ -43,9 +43,9 @@
                 {% block name_list %}
 
                 {% endblock %}
-                <a class="add_new_list" href={% url 'main:create' %}>
-                    <div class="header__button-create-bundle">+</div>
-                </a>
+                {% block create %}
+
+                {% endblock %}
             </div>
             {% for row in lists %}
                 <div class="table-data__table-row">
