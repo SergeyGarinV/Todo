@@ -11,8 +11,8 @@ class ListModel(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     is_done = models.BooleanField(default=False)
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return f'@id={self.id} @name={self.name} @user={self.user.username}'
 
     class Meta:
         verbose_name = 'Список дел'

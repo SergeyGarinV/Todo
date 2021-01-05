@@ -1,0 +1,15 @@
+{% extends 'master_create.html' %}
+
+{% block title %}
+    Новое дело
+{% endblock %}
+
+{% block form %}
+    {{ form.name }}
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% else %}
+        <br><br>
+    {% endif %}
+    {{ form.expr_date }}
+{% endblock %}

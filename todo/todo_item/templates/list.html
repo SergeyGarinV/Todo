@@ -17,15 +17,21 @@
     {% endif %}
 {% endblock %}
 
+{% block create %}
+    <a class="add_new_list" href={% url 'items:create_item' pk %}>
+        <div class="header__button-create-bundle">+</div>
+    </a>
+{% endblock %}
+
 {% block calendarik %}
     <div class="calendarik">
-        {% if row.date == None %}
+        {% if row.expr_date == None %}
             <a href='#'>
                 <img src=" /static/images/calendar.png" alt="calendar" width="26px" height="24px">
             </a>
         {% else  %}
             <a href='#'> <div class="calendarik"></div>
-                {{ row.date }}
+                {{ row.expr_date|date:"d.m.Y" }}
             </a>
         {% endif %}
     </div>
