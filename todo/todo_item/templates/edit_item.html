@@ -1,11 +1,11 @@
 {% extends 'master_create.html' %}
 
 {% block title %}
-    Новое дело
+    Редактировать дело
 {% endblock %}
 
 {% block form %}
-    <form class="auth_form_class" action={% url 'items:create_item' pk %} id="auth_form" method="POST">
+    <form class="auth_form_class" action={% url 'items:edit_item' pk %} id="auth_form" method="POST">
         {% csrf_token %}
         {{ form.name }}
         {% if form.non_field_errors %}

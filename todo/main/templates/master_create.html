@@ -17,12 +17,9 @@
 
               {% endblock %}
           </div>
-          <form class="auth_form_class" action="" id="auth_form" method="POST">
-              {% csrf_token %}
               {% block form %}
 
               {% endblock %}
-          </form>
           <div class="auth__column_right__form_footer">
             <label class="form_footer_button-submit">
               <input type="submit" form="auth_form" value="" style="display: none">

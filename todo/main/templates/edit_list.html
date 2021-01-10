@@ -1,11 +1,11 @@
 {% extends 'master_create.html' %}
 
 {% block title %}
-    Новый список
+    Редактировать список
 {% endblock %}
 
 {% block form %}
-    <form class="auth_form_class" action={% url 'main:create' %} id="auth_form" method="POST">
+    <form class="auth_form_class" action={% url 'main:edit' pk %} id="auth_form" method="POST">
         {% csrf_token %}
         {{ form.name }}
     </form>
