@@ -6,12 +6,15 @@
 {% endblock %}
 
 {% block name_list %}
-    <div class="table-data_table-header-item-1">{{ name_list }}</div>
+    <div class="table-data_table-header-item-1">
+        <a href="{% url 'main:main' %}" style="color: #48555F">ᐊ</a>
+        {{ name_list }}
+    </div>
 {% endblock %}
 
 {% block body_if %}
     {% if row.is_done %}
-        <li class="is_done_text"> {{ row.name }}</li>
+        <li class="is_done_text">{{ row.name }} </li>
     {% else %}
         {{ row.name }}
     {% endif %}
@@ -59,3 +62,22 @@
     </div>
 {% endblock %}
 
+{% block paginator %}
+    {% if is_paginated %}
+        <div class="table-data__table-row">
+            <div class="paginator_class">
+                <ul class="pagination-wrapper_button">
+                    {% for page in paginator.page_range %}
+                        <li>
+                            {% if page_obj.number == page %}
+                                <a class="active" href="{% url 'items:items' pk %}?page={{ page }}"> {{ page }}</a>
+                            {% else %}
+                                <a href="{% url 'items:items' pk %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

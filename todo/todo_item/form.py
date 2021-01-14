@@ -10,10 +10,11 @@ class ItemForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': "Название дела",
     }))
-    expr_date = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': "Дата завершения",
-        'type': "date"
-    }))
+    expr_date = forms.DateField(widget=forms.DateInput(attrs={
+        'type': 'date'
+    }),
+        required=False
+    )
 
     class Meta:
         model = ItemModel

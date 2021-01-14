@@ -16,3 +16,9 @@
         {{ form.expr_date }}
     </form>
 {% endblock %}
+
+{% block cancel_button %}
+    <a href={% url 'items:items' pk %}>
+        <div class="auth__button_submit" id="login-cancel-btn"><span>&#9587</span></div>
+    </a>
+{% endblock %}

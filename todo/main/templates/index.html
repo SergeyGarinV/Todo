@@ -44,3 +44,23 @@
         <a href="{% url "items:items" pk=row.id %}"><li>{{ row.name }}</li></a>
     {% endif %}
 {% endblock %}
+
+{% block paginator %}
+{% if is_paginated %}
+    <div class="table-data__table-row">
+        <div class="paginator_class">
+            <ul class="pagination-wrapper_button">
+                {% for page in paginator.page_range %}
+                    <li>
+                        {% if page_obj.number == page %}
+                        <a class="active" href="{% url 'main:main' %}?page={{ page }}"> {{ page }}</a>
+                    {% else %}
+                        <a href="{% url 'main:main' %}?page={{ page }}">{{ page }}</a>
+                    {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

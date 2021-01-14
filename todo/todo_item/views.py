@@ -3,17 +3,29 @@ from todo_item.models import ItemModel
 from main.models import ListModel
 from todo_item.form import ItemForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from todo.settings import DIV_COUNT
 
 
 @login_required(login_url='registration:login')
 def item_view(request, pk):
     lists = ListModel.objects.select_related('user').get(id=pk)
-    list_item = ItemModel.objects.filter(listmodules=lists)
+    list_item = ItemModel.objects.filter(listmodules=lists).order_by('created')
+    paginator = Paginator(list_item, DIV_COUNT)
+    page = request.GET.get('page')
+    if not page:
+        page = 1
+    is_paginated = len(list_item) > DIV_COUNT
     context = {
-        'lists': list_item,
+        'lists': paginator.page(page),
         'user_name': request.user,
         'name_list': lists.name,
-        'pk': pk
+        'pk': pk,
+        'paginator': paginator,
+        'is_paginated': is_paginated,
+        'page_obj': {
+            'number': int(page)
+        }
     }
     return render(request, 'list.html', context)
 
@@ -58,7 +70,8 @@ def edit_item(request, pk):
             return redirect(success_url)
     contex = {
         'form': form,
-        'pk': pk
+        'pk': pk,
+        'listmodules': item_.listmodules.id
     }
     return render(request, 'edit_item.html', contex)
 

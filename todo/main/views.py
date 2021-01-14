@@ -3,14 +3,26 @@ from main.models import ListModel
 from main.form import ListForm
 from todo_item.models import ItemModel
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from todo.settings import DIV_COUNT
 
 
 @login_required(login_url='registration:login')
 def main_view(request):
-    lists = ListModel.objects.filter(user=request.user)
+    lists = ListModel.objects.filter(user=request.user).order_by('created')
+    paginator = Paginator(lists, DIV_COUNT)
+    page = request.GET.get('page')
+    if not page:
+        page = 1
+    is_paginated = len(lists) > DIV_COUNT
     contex = {
-        'lists': lists,
-        'user_name': request.user.username
+        'lists': paginator.page(page),
+        'user_name': request.user.username,
+        'paginator': paginator,
+        'is_paginated': is_paginated,
+        'page_obj': {
+            'number': int(page)
+        }
     }
     return render(request, 'index.html', contex)
 
