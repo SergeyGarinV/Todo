@@ -7,6 +7,8 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
+from django.http import HttpResponse
+import json
 
 
 class MainView(LoginRequiredMixin, generic.ListView):
@@ -64,11 +66,15 @@ def edit_view(request, pk):
     return render(request, 'edit_list.html', contex)
 
 
-def delete_list(request, pk):
-    list_ = ListModel.objects.get(id=pk)
-    list_.delete()
-    success_url = reverse('main:main')
-    return redirect(success_url)
+def delete_list(request):
+    body = json.loads(request.body.decode())
+    id = int(body.get('id', 0))
+    if id:
+        item = ListModel.objects.get(id=id)
+        if item:
+            item.delete()
+            return HttpResponse(status=201)
+    return HttpResponse(status=404)
 
 
 def logout_view(request):

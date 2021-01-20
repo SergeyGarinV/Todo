@@ -7,6 +7,8 @@ from todo.settings import DIV_COUNT
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.http import HttpResponse
+import json
 
 
 class ItemView(LoginRequiredMixin, generic.ListView):
@@ -80,9 +82,24 @@ def edit_item(request, pk):
     return render(request, 'edit_item.html', contex)
 
 
-def delete_item(request, pk):
-    item_ = ItemModel.objects.get(id=pk)
-    pk = item_.listmodules_id
-    item_.delete()
-    success_url = reverse('items:items', kwargs={'pk': pk})
-    return redirect(success_url)
+def delete_item(request):
+    body = json.loads(request.body.decode())
+    id = int(body.get('id', 0))
+    if id:
+        item = ItemModel.objects.get(id=id)
+        if item:
+            item.delete()
+            return HttpResponse(status=201)
+    return HttpResponse(status=404)
+
+
+def is_done_view(request):
+    body = json.loads(request.body.decode())
+    id = int(body.get('id', 0))
+    if id:
+        item = ItemModel.objects.get(id=id)
+        if item:
+            item.is_done = not item.is_done
+            item.save()
+            return HttpResponse(status=201)
+    return HttpResponse(status=404)
