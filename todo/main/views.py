@@ -70,7 +70,7 @@ def delete_list(request):
     body = json.loads(request.body.decode())
     id = int(body.get('id', 0))
     if id:
-        item = ListModel.objects.get(id=id)
+        item = ListModel.objects.filter(id=id).first()
         if item:
             item.delete()
             return HttpResponse(status=201)

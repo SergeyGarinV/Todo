@@ -86,7 +86,7 @@ def delete_item(request):
     body = json.loads(request.body.decode())
     id = int(body.get('id', 0))
     if id:
-        item = ItemModel.objects.get(id=id)
+        item = ItemModel.objects.filter(id=id).first()
         if item:
             item.delete()
             return HttpResponse(status=201)
@@ -97,7 +97,7 @@ def is_done_view(request):
     body = json.loads(request.body.decode())
     id = int(body.get('id', 0))
     if id:
-        item = ItemModel.objects.get(id=id)
+        item = ItemModel.objects.filter(id=id).first()
         if item:
             item.is_done = not item.is_done
             item.save()
