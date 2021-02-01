@@ -650,16 +650,7 @@ body {
   .table-data-two_table-icon {
     display: inline-block;
   }
-li:before {
-  content: '';
-  display: inline-block;
-  height: 6px;
-  width: 6px;
-  vertical-align: middle;
-  background-color: #FF4646;
-  margin-right: 20px;
 
-}
 li {
  list-style-type: none;
 }
@@ -686,4 +677,46 @@ li {
 
 .is_done_text {
   text-decoration: line-through;
+}
+.pagination-wrapper_button {
+  width: 200px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 15px;
+  line-height: 20px; }
+
+ul.pagination-wrapper_button {
+  display: inline-block;
+  padding: 5px;
+  margin: 0;
+  list-style-type: none;
+}
+
+ul.pagination-wrapper_button li {
+  display: inline;
+}
+
+ul.pagination-wrapper_button li a {
+  color: black;
+  float: left;
+  padding: 5px 9px;
+  text-decoration: none;
+  margin: 5px;
+}
+
+ul.pagination-wrapper_button li a.active {
+  background-color: #FF4646;
+  color: white;
+  border-radius: 6px; }
+
+ul.pagination-wrapper_button li a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 6px; }
+
+.paginator_class {
+  grid-column: 2/3;
+  width: 200px;
+  word-break: break-all;
+  margin-left: 50px;
 }
